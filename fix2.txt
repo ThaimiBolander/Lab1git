@@ -1,0 +1,102 @@
+Lab1_Git_JavaVerktygByggmiljö.txt
+
+Text ang vad jag gör i Lab 1:
+
+1.Öppnar terminal i Power Shell
+2. Skapar en ny folder i hemkatalog namnn: lab1git. Kommando: New-Item -ItemType Directory -Path .\Lab1git
+3. Tar mig till folder: cd Lab1git
+4. Skapar nytt git repo för branch main: git init -b main
+5. Skapar en README.md fil och skriver till 3 djur; duck, moose, cat. Kommando: "duck", "moose", "cat" | Out-File -FilePath .\README.md
+6. Förbereder staging med: git add . (Sparar allt i folder)
+7. Gör första commit Kommando: git commit -m "Initial commit"
+8 Skapa ny branch namn feature1 och växla över till den: git checkout -b feature1
+9. Lägger manuellt till i README.md dog sist som ett fjärde djur och byter ut moose mot mouse.
+10. kommando: git add README.md
+11. Gör en ny commit på ändringar: git commit -m "Replace moose with mouse and add dog"
+12. Växla tillbaka till main: git checkout main 
+13. Manuellt ändrar i main "moose" till "mahmut"
+14. git add README.md
+15. Kör en commit: git commit -m "Change moose to mahmut"
+16. Merga main med feature1: git merge feature1
+Får en Auto-merging CONFLICT. "Merge failed"
+17. Försöker lösa konflikt genom att switch till feature1(då HEAD pekar nu på main). Sen merge main
+Vi har
+main:
+duck
+mahmut
+cat
+
+feature1:
+duck
+mouse
+cat
+dog
+
+Mål:
+duck
+mahmut
+mouse
+cat 
+dog
+
+Jag får inte checkout eller swith då jag är i merge mode git säger: "fatal: cannot switch branch while merging"
+Jag får testa att ändra i README.md manuellt..
+Min README.md ser ut såhär:
+duck
+<<<<<<< HEAD
+mahmut
+=======
+mouse
+>>>>>>> feature1
+cat
+dog
+
+18. Det fungerade att ändra filen manuellt, jag sparar nu genom: git add README.md
+19. Commitar: git commit -m "Resolved merge conflict by integrating changes from main and feature1"
+
+20. Jag säkerställer med kommandon: 
+git checkout main
+git merge feature1
+Får medd: Already up to date" så merge är klar
+
+21. Skapar en lightweight tag med namnet "extinct": git tag extinct
+
+22. Flyttar main och HEAD tillbaka till föregående commit
+på main branchen: git reset --hard HEAD~1
+Får medd: "HEAD is now at c89be2d Change moose to mahmut"
+Och vi är tillbaka på (i README.md):
+duck
+mahmut
+cat
+
+23. Skapar ny branch: feature2 men stanna kvar på main: git branch feature2
+
+24. Ändrar alla sjurnamn till att börja med Versal, skapar en commit: 
+git add README.md
+git commit -m "Update animal names to start with uppercase"
+
+25. Byter till feature2: git switch feature2
+26. Skapar 2 nya filer samt gör dess 2 commits
+Kommandon:
+
+New-Item fix1.txt
+git add fix1.txt
+git commit -m "Add fix1.txt"
+
+New-Item fix2.txt
+git add fix2.txt
+git commit -m "Add fix2.txt"
+
+27. Byter tillbaka till main branchen och se att filerna fix1 och fix2 försvunnit i mitt lokala filsystem: git swithc main
+git graph 
+-> Sparar hashen för commit add fix2.txt = 0df11cf
+
+27. För att göra en cherry-pick i main på fix2.txt: 
+git cherry-pick 0df11cf
+Med git graph
+Kan jag nu se att main fått med fix2.txt genom en ny commit:
+* 661a290 (HEAD -> main) Add fix2.txt
+
+
+
+
