@@ -97,6 +97,7 @@ Med git graph
 Kan jag nu se att main fått med fix2.txt genom en ny commit:
 * 661a290 (HEAD -> main) Add fix2.txt
 
+
 Uppd. fix2.txt enligt steg 20 i lab1:
 
 För att skapa en annoterad tag: git tag -a v1.0 -m "Version 1.0"
